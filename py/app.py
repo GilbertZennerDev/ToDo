@@ -10,9 +10,8 @@ def addTask(tasks, newtask):
 	return tasks
 	
 def deleteTask(tasks, deletetask):
-	tasks = [task for task in tasks if deletetask not in task]
+	tasks.pop(tasks.index(deletetask))
 	print(f"Task .{deletetask}. deleted");
-	return tasks
 
 def listTasks(tasks):
 	for task in tasks: print(task)
@@ -31,10 +30,10 @@ def awaitCmd():
 		cmd = input("Usage: 'add milk' or 'list' or 'delete milk' or exit:\n")
 		cmd = cmd.split(' ')
 		if cmd[0] == "add": tasks = addTask(tasks, "".join(cmd[1:]))
-		if cmd[0] == "delete": tasks = deleteTask(tasks, "".join(cmd[1:]))
+		elif cmd[0] == "delete": deleteTask(tasks, "".join(cmd[1:]))
 		elif cmd[0] == "list": listTasks(tasks)
 		elif cmd[0] == "save": saveTasks(tasks)
-		elif cmd[0] == "load": tasks += loadTasks()
+		elif cmd[0] == "load": tasks = loadTasks()
 		elif cmd[0] == "exit": exit()
 
 def	main():
